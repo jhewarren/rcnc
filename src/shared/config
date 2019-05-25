@@ -1,0 +1,11 @@
+# config file for
+
+filt udp and port 53
+sip	10.100.5.23
+dip 10.100.5.24
+tip 10.100.5.34
+sport xxx
+dport 53
+tport xxx
+proto UDP
+pass ^Dat@C0Mm$
