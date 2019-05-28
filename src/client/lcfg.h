@@ -18,8 +18,7 @@
  #define NET_BUF_SIZE 32
  #define cipherKey 'S'
  #define sendrecvflag 0
- // config uses key<space>value format, ignoring ^# and ^/n
- // send pointer to base address of kv pairs
+ #define BUFSZ 256 //outbound max message
 
 int load_cfg();
  int fnsniff();
@@ -46,8 +45,6 @@ struct profiledefn{
 	char prog[64];
  };
  struct profiledefn prf;
- char keys[10][6] = {"sip","dip","tip","proto","sport","dport","tport","filt","pass","prog"};
-
 
 /*  another time perhaps
 typedef struct kvp_t{

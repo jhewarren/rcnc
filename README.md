@@ -1,55 +1,21 @@
 # Design
 ## Server
-camouflage
-sniff
-filter
-interpret
-encrypt
-respond
+camouflage; sniff; filter; interpret; encrypt; respond;
 
 ## client
-get input
-encrypt
-send message
-wait for response
-decrypt
-display response
+get input; encrypt; send message; wait for response; decrypt; display response
 
 # Pseudo
 ## server
-confirm root/fix
-interpret command line
-output usage on error|help & exit
-camouflage backdoor
-while not 'quit'
-    sniff packets
-        authenticate packets
-            decrypt packets
-                interpret message
-                do commmand
-                send results
+confirm root; interpret command line; output usage on error|help & exit; camouflage backdoor; while not 'quit'; > sniff packets; > authenticate packets; > decrypt packets; > interpret message; > do commmand; > send results
 
 ## client
-confirm root/fix
-interpret command line
-display notification
-while entry not blank line
-    encrypt command
-    send command
-        open connection
-        send message
-        close connection
-    wait for response
-        listen on port
-        decrypt response
-        display response
-        close connection
-exit
+confirm root; interpret command line; open connection; display notification; while entry not blank line; > encrypt message ; > send message; > wait for response; >> decrypt response; >> display response; close connection; exit
 
 # Testing
 ## plan
 1. backdoor must disguise itself
-2. backdoor must sniff all packets 
+2. backdoor must sniff all packets
 3. backdoor must authenticate messages
 4. backdoor must interpret commands
 5. backdoor must send results of commands
@@ -71,7 +37,7 @@ exit
   Source:
   Functions:
   Date:
-  Revivions: 
+  Revivions:
   Designers:
   Programmer: John Warren
   Usage:

